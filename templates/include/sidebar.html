@@ -1,0 +1,38 @@
+{% load movie_tag %}
+<div class="search-bar w3layouts-newsletter">
+    <h3 class="sear-head editContent" >Search</h3>
+    <form action="{% url 'search' %}" method="get" class="d-flex editContent" >
+        <input type="search" placeholder="Try to find...." name="q" class="form-control" required="">
+        <button class="btn1 btn" type="submit"><span class="fa fa-search" aria-hidden="true" ></span></button>
+    </form>
+</div>
+<!--preference -->
+<form action="{% url 'filter' %}" method="get">
+<div class="left-side my-4">
+    <h3 class="sear-head editContent" >Genre</h3>
+    <ul class="w3layouts-box-list">
+    {% for genre in view.get_genres %}
+        <li class="editContent" >
+            <input type="checkbox" class="checked" name="genre" value="{{ genre.id }}">
+            <span class="span editContent" >{{ genre.name }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+<!-- // preference -->
+<!-- discounts -->
+<div class="left-side my-4">
+    <h3 class="sear-head editContent" >Year</h3>
+    <ul class="w3layouts-box-list">
+    {% for movie in view.get_years %}
+        <li class="editContent" >
+            <input type="checkbox" class="checked" name="year" value="{{ movie.year }}">
+            <span class="span editContent" >{{ movie.year }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+    <button type="submit">Filter</button>
+</div>
+
+</form>
+{% get_latest_movies count=3 %}
